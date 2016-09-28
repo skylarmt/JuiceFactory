@@ -2,7 +2,7 @@ package name.skylarismy;
 
 public class Drone extends Thread {
 
-    Plant parentplant;
+    private Plant parentplant;
 
     public Drone(Plant plant) {
         this(plant, "Child laborer #" + String.valueOf(Math.round(Math.random() * 1000)));
