@@ -13,13 +13,6 @@ public class Drone extends Thread {
         setName(name);
     }
 
-    public void processEntireOrange(Orange o) {
-        while (o.getState() != Orange.State.Bottled) {
-            o.runProcess();
-        }
-        parentplant.orangesProcessed++;
-    }
-
     @Override
     public void run() {
         System.out.print(Thread.currentThread().getName() + " processing oranges\n");
