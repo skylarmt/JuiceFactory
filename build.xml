@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JuiceFactory" default="compile" basedir=".">
+    <description>An orange juice factory, powered by child labor.</description>
+
+    <property name="src" location="src"/>
+    <property name="dist" location="dist"/>
+
+    <target name="init">
+        <mkdir dir="${dist}"/>
+        <mkdir dir="${dist}/classes"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac includeantruntime="false" srcdir="${src}" destdir="${dist}/classes"/>
+    </target>
+
+    <target name="jar" depends="init,compile">
+        <jar destfile="${dist}/JuiceFactory.jar" basedir="${dist}/classes">
+            <manifest>
+                <attribute name="Main-Class" value="name.skylarismy.Company"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <java jar="${dist}/JuiceFactory.jar" fork="true"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${dist}"/>
+    </target>
+</project>
