@@ -1,13 +1,29 @@
 package name.skylarismy;
 
+/**
+ * A child labor drone. It has little education, but is good at making orange
+ * juice.
+ *
+ * TODO: Add code to pay them a penny a day. For now, they get a free orange,
+ * since we have a limitless supply.
+ */
 public class Drone extends Thread {
 
     private Plant parentplant;
 
+    /**
+     * Create a child worker.  Assigns it to a plant.
+     * @param plant The plant the worker is assigned to.
+     */
     public Drone(Plant plant) {
         this(plant, "Child laborer #" + String.valueOf(Math.round(Math.random() * 1000)));
     }
 
+    /**
+     * Create a child worker.  Assigns it to a plant and names it.
+     * @param plant The plant the worker is assigned to.
+     * @param name The name of the child worker.
+     */
     public Drone(Plant plant, String name) {
         parentplant = plant;
         setName(name);
@@ -21,9 +37,10 @@ public class Drone extends Thread {
             synchronized (parentplant.orangequeue) {
                 if (parentplant.orangequeue.isEmpty()) {
                     parentplant.orangequeue.add(new Orange());
+                    parentplant.orangesProvided++;
                 }
+                System.out.print(parentplant.orangequeue.size());
             }
-            parentplant.orangesProvided++;
 
             // Do something to an orange
             Orange orange;

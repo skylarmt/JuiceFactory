@@ -1,7 +1,15 @@
 package name.skylarismy;
 
+/**
+ * An orange. Has several states of existence. Not to be confused with Donald
+ * Trump.
+ */
 public class Orange {
 
+    /**
+     * The state of the orange. Unlike the State of the Union, it's not simply
+     * "all gone to hell".
+     */
     public enum State {
         Fetched(15),
         Peeled(38),
@@ -33,10 +41,21 @@ public class Orange {
         doWork();
     }
 
+    /**
+     * Get the orange's state.
+     *
+     * @return the state.
+     */
     public State getState() {
         return state;
     }
 
+    /**
+     * Do something to the orange.
+     *
+     * @throws IllegalStateException if the orange is completely done (the state
+     * is processed).
+     */
     public void runProcess() {
         // Don't attempt to process an already completed orange
         if (state == State.Processed) {
@@ -46,6 +65,10 @@ public class Orange {
         state = state.getNext();
     }
 
+    /**
+     * I'm gonna juice an orange, and the orange is gonna pay for it. It doesn't
+     * know it will yet, but it will.
+     */
     private void doWork() {
         // Sleep for the amount of time necessary to do the work
         try {

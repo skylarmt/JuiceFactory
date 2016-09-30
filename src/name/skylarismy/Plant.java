@@ -3,6 +3,10 @@ package name.skylarismy;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * A factory for processing oranges. Filled with infinite oranges and a bunch of
+ * child workers/drones.
+ */
 public class Plant {
 
     public final int ORANGES_PER_BOTTLE = 3;
@@ -13,14 +17,23 @@ public class Plant {
     protected volatile boolean timeToWork;
 
     // A queue of oranges, so the workers can pass them around as needed
-    public final Queue<Orange> orangequeue = new ArrayBlockingQueue<>(ORANGES_PER_BOTTLE * WORKERS_PER_PLANT);
+    public final Queue<Orange> orangequeue = new ArrayBlockingQueue<>(WORKERS_PER_PLANT);
 
+    // The workers.
     private Drone[] workers;
 
+    /**
+     * Grow an all-natural factory plant. They are grown, not built, right?
+     */
     Plant() {
         this("Plant");
     }
 
+    /**
+     * Make a juice plant/factory.
+     *
+     * @param name This just goes on a sign over the door, nobody really cares.
+     */
     Plant(String name) {
         orangesProvided = 0;
         orangesProcessed = 0;
@@ -30,6 +43,9 @@ public class Plant {
         }
     }
 
+    /**
+     * Start the plant working. Kicks all the worker drones into action.
+     */
     public void startPlant() {
         timeToWork = true;
         // Yell at all the workers to start working
@@ -38,6 +54,9 @@ public class Plant {
         }
     }
 
+    /**
+     * Wait for the workers to stop working.
+     */
     public void waitToStop() {
         for (Drone worker : workers) {
             try {
@@ -49,6 +68,9 @@ public class Plant {
         }
     }
 
+    /**
+     * Tell the plant to shut down.  Should be followed by waitToStop().
+     */
     public void stopPlant() {
         timeToWork = false;
     }
